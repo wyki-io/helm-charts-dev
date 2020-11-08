@@ -35,7 +35,7 @@ jobs:
         run: |
           export DESTINATION_FOLDER=${{ format('{0}/{1}', env.HELM_ROOT, env.PROJECT) }}
           mkdir -p $DESTINATION_FOLDER
-          mv ./${{ env.project }}-*.tgz $DESTINATION_FOLDER
+          mv ./${{ env.PROJECT }}-*.tgz $DESTINATION_FOLDER
       - name: Update Helm repository index
         run: |
           cd ${{ env.HELM_ROOT }}
