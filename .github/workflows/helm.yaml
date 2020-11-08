@@ -28,6 +28,8 @@ jobs:
           version: v3.4.0
       - name: Package chart
         run: helm package ${{ github.event.client_payload.repository }}/chart
+      - name: Update Helm repository index
+        run: helm repo index --merge index.yaml .
       - name: Move chart to project folder
         run: |
           mkdir -p ${{ env.PROJECT }}
@@ -43,7 +45,7 @@ jobs:
           author_name: Wykiki
           author_email: wykiki@wyki.io
           message: Release ${{ env.PROJECT }} chart ${{ steps.get-tag.outputs.tag }}
-          add: ./cert-sync
+          add: index.yaml ./cert-sync
       # - name: Push chart
       #   uses: ad-m/github-push-action@master
       #   with:
