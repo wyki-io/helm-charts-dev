@@ -2,8 +2,32 @@ apiVersion: v1
 entries:
   cert-sync:
   - apiVersion: v2
+    appVersion: 0.1.0-rc.20
+    created: "2020-11-08T19:15:57.124683782Z"
+    description: Synchronize your Kubernetes TLS Secrets to external provider
+    digest: 2c80bdd83b1188c476ec686fbaba2db650b963d974bab116371e5cda5771edbe
+    keywords:
+    - kubernetes
+    - certificate
+    - tls
+    - ssl
+    - aws
+    - acm
+    - alb
+    - elb
+    maintainers:
+    - email: contact@wyki.io
+      name: Wyki
+    name: cert-sync
+    sources:
+    - https://github.com/wyki-io/cert-sync
+    type: application
+    urls:
+    - cert-sync/cert-sync-0.1.0-rc.20.tgz
+    version: 0.1.0-rc.20
+  - apiVersion: v2
     appVersion: 0.1.0-rc.19
-    created: "2020-11-08T18:59:15.029051485Z"
+    created: "2020-11-08T19:15:57.12421518Z"
     description: Synchronize your Kubernetes TLS Secrets to external provider
     digest: 7a5f5d80f4a482983a33099c745d649c9f949ca4236b9054525c7889137eb481
     keywords:
@@ -25,4 +49,4 @@ entries:
     urls:
     - cert-sync/cert-sync-0.1.0-rc.19.tgz
     version: 0.1.0-rc.19
-generated: "2020-11-08T18:59:15.028035169Z"
+generated: "2020-11-08T19:15:57.123491477Z"
