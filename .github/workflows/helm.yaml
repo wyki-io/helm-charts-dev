@@ -9,7 +9,7 @@ jobs:
   cert-sync:
     name: Cert-Sync publication
     runs-on: ubuntu-latest
-    if: github.event.client_payload.repository == wyki-io/cert-sync
+    if: github.event.client_payload.repository == "wyki-io/cert-sync"
     env:
       PROJECT: cert-sync
     steps:
