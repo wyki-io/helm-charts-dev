@@ -33,7 +33,7 @@ jobs:
         run: helm package ${{ github.event.client_payload.repository }}/chart
       - name: Move chart to project folder
         run: |
-          export DESTINATION_FOLDER=${{ format('{0}/{1}', env.HELM-ROOT, env.PROJECT) }}
+          export DESTINATION_FOLDER=${{ format('{0}/{1}', env.HELM_ROOT, env.PROJECT) }}
           mkdir -p $DESTINATION_FOLDER
           mv ./${{ env.project }}-*.tgz $DESTINATION_FOLDER
       - name: Update Helm repository index
