@@ -6,6 +6,8 @@ on:
       - notify-helm-repository
 
 jobs:
+  # If you want to add another listener, just copy / paste this job, change the
+  # if condition and the PROJECT name
   cert-sync:
     name: Cert-Sync publication
     runs-on: ubuntu-latest
@@ -52,4 +54,4 @@ jobs:
           author_name: Wykiki
           author_email: wykiki@wyki.io
           message: Release ${{ env.PROJECT }} chart ${{ steps.get-tag.outputs.tag }}
-          add: index.yaml ./cert-sync
+          add: index.yaml ./${{ env.PROJECT }}
