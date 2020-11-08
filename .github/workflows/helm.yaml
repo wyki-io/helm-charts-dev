@@ -1,0 +1,51 @@
+name: Helm Repository Dispatch
+
+on:
+  repository_dispatch:
+    types:
+      - notify-helm-repository
+
+jobs:
+  cert-sync:
+    name: Cert-Sync publication
+    runs-on: ubuntu-latest
+    if: github.event.client_payload.repository == wyki-io/cert-sync
+    env:
+      PROJECT: cert-sync
+    steps:
+      - name: Checkout remote project
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.event.client_payload.repository }}
+          ref: ${{ github.event.client_payload.ref }}
+          path: ${{ github.event.client_payload.repository }}
+          fetch-depth: 0
+      - name: Checkout local project
+        uses: actions/checkout@v2
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.4.0
+      - name: Package chart
+        run: helm package ${{ github.event.client_payload.repository }}/chart
+      - name: Move chart to project folder
+        run: |
+          mkdir -p ${{ env.PROJECT }}
+          mv ./${{ env.project }}-*.tgz 
+      - name: Extract Tag from Ref
+        id: get-tag
+        run: echo ::set-output name=tag::${${{ github.event.client_payload.ref }}#refs/*/}
+      - name: Commit new chart
+        uses: EndBug/add-and-commit@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          author_name: Wykiki
+          author_email: wykiki@wyki.io
+          message: Release ${{ env.PROJECT }} chart ${{ steps.get-tag.outputs.tag }}
+          add: ./cert-sync
+      # - name: Push chart
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }}
