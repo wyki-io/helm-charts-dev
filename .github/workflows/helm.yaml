@@ -53,8 +53,3 @@ jobs:
           author_email: wykiki@wyki.io
           message: Release ${{ env.PROJECT }} chart ${{ steps.get-tag.outputs.tag }}
           add: index.yaml ./cert-sync
-      # - name: Push chart
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     branch: ${{ github.ref }}
